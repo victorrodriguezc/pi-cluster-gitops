@@ -18,3 +18,9 @@ spec:
   values:
     grafana:
       adminPassword: admin
+    prometheus:
+      prometheusSpec:
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
