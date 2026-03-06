@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflared
+  namespace: cloudflare
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: cloudflare-tunnel
+      version: "0.3.2"   # pin a version
+      sourceRef:
+        kind: HelmRepository
+        name: cloudflare
+        namespace: flux-system
+  install:
+    createNamespace: true
+  values:
+    cloudflare:
+      ingress:
+      - hostname: open-webui.victorlab.work
+        service: http://open-webui.ai-space.svc.cluster.local:80
+      - hostname: ssh.victorlab.work
+        service: ssh://192.168.50.32:22
+      secretName: tunnel-credentials
+      tunnelId: 331780f8-f1af-42a9-b3bf-0427cd5e70b3
+      tunnelName: homelab-tunnel
+    image:
+      repository: cloudflare/cloudflared
+      tag: latest
+    replicaCount: 2
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
