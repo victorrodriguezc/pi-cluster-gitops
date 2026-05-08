@@ -24,6 +24,8 @@ spec:
         service: ssh://192.168.50.32:22
       - hostname: aws-cost-leak-detector.victorlab.work
         service: http://aws-cost-detector-frontend.default.svc.cluster.local:80
+      - hostname: keycloak-ui.victorlab.work
+        service: http://keycloak.default.svc.cluster.local:8080
       secretName: tunnel-credentials
       tunnelId: 331780f8-f1af-42a9-b3bf-0427cd5e70b3
       tunnelName: homelab-tunnel
