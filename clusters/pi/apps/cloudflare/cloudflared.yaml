@@ -26,6 +26,8 @@ spec:
         service: http://aws-cost-detector-frontend.default.svc.cluster.local:80
       - hostname: keycloak-ui.victorlab.work
         service: http://keycloak.keycloak.svc.cluster.local:8080
+      - hostname: homeassistant.victorlab.work
+        service: http://home-assistant.homeassistant.svc.cluster.local:8123
       secretName: tunnel-credentials
       tunnelId: 331780f8-f1af-42a9-b3bf-0427cd5e70b3
       tunnelName: homelab-tunnel
