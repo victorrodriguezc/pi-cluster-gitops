@@ -12,6 +12,7 @@ spec:
       labels:
         app: home-assistant
     spec:
+      hostNetwork: true
       initContainers:
       - name: init-config
         image: busybox
@@ -30,10 +31,26 @@ spec:
           script: !include scripts.yaml
           scene: !include scenes.yaml
 
+          homeassistant:
+            external_url: "https://homeassistant.victorlab.work"
+            internal_url: "http://home-assistant.homeassistant.svc.cluster.local:8123"
+
           http:
             use_x_forwarded_for: true
             trusted_proxies:
               - 10.42.0.0/16
+          
+          wake_on_lan:
+          
+          emulated_hue:
+            host_ip: 192.168.50.222
+            listen_port: 80
+            expose_by_default: false
+            entities:
+              automation.turn_on_lg_tv:
+                name: "TV Sala"
+                hidden: false
+
           EOF
           fi
         volumeMounts:
